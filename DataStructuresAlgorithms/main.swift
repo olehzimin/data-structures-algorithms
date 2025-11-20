@@ -7,4 +7,12 @@
 
 import Foundation
 
-print("Hello world")
+var linkedList = LinkedList<Int>()
+
+linkedList.add(1)
+linkedList.add(2)
+linkedList.add(5)
+
+let searchOut = linkedList.search(for: 6)
+
+print(searchOut)
