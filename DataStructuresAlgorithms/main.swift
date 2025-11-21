@@ -7,12 +7,11 @@
 
 import Foundation
 
-var linkedList = LinkedList<Int>()
+var testArray = [1, 2, 5, 9, 15, 19]
 
-linkedList.add(1)
-linkedList.add(2)
-linkedList.add(5)
+let search1 = Algorithm.binarySearchRecursive(25, in: testArray)
+let search2 = Algorithm.binarySearch(19, in: testArray)
 
-let searchOut = linkedList.search(for: 6)
+print(search1)
+print(search2)
 
-print(searchOut)
