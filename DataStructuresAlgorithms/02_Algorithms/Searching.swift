@@ -11,6 +11,7 @@ extension Algorithm {
     // Recursive Binary Search divides the array into left and right halves,
     // compares the middle element with the target,
     // and then calls itself recursively on the appropriate half.
+    // Time complexety: O(log n)
     static func binarySearchRecursive<C>(_ element: C.Element, in array: C) -> C.Index? where C: RandomAccessCollection, C.Element: Comparable {
         guard array.count > 1 else {
             if let first = array.first, first == element {
@@ -38,6 +39,7 @@ extension Algorithm {
     
     // Recursive Binary Search divides the array into left and right halves,
     // using two pointers left and right as bouderies.
+    // Time complexety: O(log n)
     static func binarySearch<C>(_ element: C.Element, in array: C) -> C.Index? where C: RandomAccessCollection, C.Element: Comparable {
         guard !array.isEmpty else { return nil }
         var leftIndex = array.startIndex

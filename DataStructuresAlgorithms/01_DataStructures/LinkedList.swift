@@ -7,7 +7,7 @@
 
 import Foundation
 
-// Singlepointer LinkedList
+// Onesided LinkedList - sequential access collection
 struct LinkedList<T>: CustomStringConvertible where T: Equatable {
     private var head: LinkedNode<T>?
     
@@ -49,7 +49,7 @@ struct LinkedList<T>: CustomStringConvertible where T: Equatable {
         return count
     }
     
-    // Adds element to the head of the list
+    // Adds new element to the head of the list
     // Time complexity: O(1)
     mutating func add(_ element: T) {
         let newHead = LinkedNode(value: element, nextNode: head)
@@ -73,18 +73,59 @@ struct LinkedList<T>: CustomStringConvertible where T: Equatable {
         return result
     }
     
-    // Implement
-    func insert() { }
-    func remove() { }
+    // Inserts new element after specified node
+    // Time complexety: O(1)
+    func insert(_ element: T, after node: LinkedNode<T>) {
+        let newNode = LinkedNode(value: element, nextNode: node.nextNode)
+        node.nextNode = newNode
+    }
+    
+    // Removes node from the list
+    // Time complexety: O(1)
+    func remove(after node: LinkedNode<T>) {
+        var removedNode = node.nextNode
+        node.nextNode = removedNode?.nextNode
+    }
+    
+    // Removes and returns node from the list if elemet is found
+    // Time complexety: O(n)
+    mutating func remove(element: T) -> LinkedNode<T>? {
+        var result: LinkedNode<T>? = nil
+        var previous: LinkedNode<T>? = nil
+        var current: LinkedNode<T>? = head
+        
+        while let _current = current {
+            if _current.value == element {
+                break
+            }
+            previous = current
+            current = _current.nextNode
+        }
+        
+        if let current {
+            result = current
+            if let previous {
+                self.remove(after: previous)
+            } else {
+                head = current.nextNode
+            }
+        }
+        
+        return result
+    }
 }
 
 class LinkedNode<T>: CustomStringConvertible where T: Equatable {
     private(set) var value: T
-    private(set) var nextNode: LinkedNode?
+    fileprivate(set) var nextNode: LinkedNode?
     
     init(value: T, nextNode: LinkedNode? = nil) {
         self.value = value
         self.nextNode = nextNode
+    }
+    
+    deinit {
+        print("Node \(description) removed")
     }
     
     var description: String {
