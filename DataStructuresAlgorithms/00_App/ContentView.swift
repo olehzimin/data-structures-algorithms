@@ -23,7 +23,7 @@ struct ContentView: View {
         }
         .onAppear {
             if !hasExecuted {
-                executeOnAppear()
+                runOnAppear()
                 hasExecuted = true
             }
         }
