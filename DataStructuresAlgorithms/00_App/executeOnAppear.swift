@@ -40,6 +40,13 @@ func runOnAppear() {
     
     linkedList.remove(element: 5)
     print(linkedList)
+    print()
     
+    print("Selection Sort")
+    print("---------------------")
+    let names = ["Zaha", "Alex", "Ann", "Ben", "Peter", "Camila", "Dionis"]
+    let sortedNames = Algorithm.selectionSort(names)
+    
+    print("names - \(names)\nsorted - \(sortedNames)")
     print()
 }
