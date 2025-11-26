@@ -15,9 +15,9 @@ final class SortingTests: XCTestCase {
         var array2 = ["Zaha", "Alex", "Ann", "Ben", "Peter", "Camila", "Dionis"]
         var array3: [Double] = []
         // When
-        let smallest1 = Algorithm.removeSmallest(in: &array1)
-        let smallest2 = Algorithm.removeSmallest(in: &array2)
-        let smallest3 = Algorithm.removeSmallest(in: &array3)
+        let smallest1 = Algorithm.popSmallest(in: &array1)
+        let smallest2 = Algorithm.popSmallest(in: &array2)
+        let smallest3 = Algorithm.popSmallest(in: &array3)
         // Then
         XCTAssertEqual(smallest1, 1)
         XCTAssertEqual(array1, [5, 2, 3, 8, 1])

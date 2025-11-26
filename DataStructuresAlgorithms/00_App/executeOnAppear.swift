@@ -49,4 +49,17 @@ func runOnAppear() {
     
     print("names - \(names)\nsorted - \(sortedNames)")
     print()
+    
+    print("Recursion")
+    print("---------------------")
+    print("factorial of 6 = \(Algorithm.factorialRecursive(of: 6))")
+    print()
+    
+    let anyContainer: Any = [1, 2,[8, ["hello", 3.25]], "Alex"]
+    print("container - \(anyContainer)")
+    
+    print("search for 1 - \(Algorithm.recursiveSearch(for: 1, in: anyContainer))")
+    print("search for 5 - \(Algorithm.recursiveSearch(for: 5, in: anyContainer))")
+    print("search for 'hello' - \(Algorithm.recursiveSearch(for: "hello", in: anyContainer))")
+    print()
 }
