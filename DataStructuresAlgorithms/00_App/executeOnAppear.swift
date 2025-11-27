@@ -17,6 +17,20 @@ func runOnAppear() {
     print(Algorithm.binarySearch(4, in: array))
     print()
     
+    print("Stack")
+    print("---------------------")
+    var stack = Stack<Int>()
+    stack.push(25)
+    stack.push(26)
+    stack.push(27)
+    stack.push(28)
+    
+    print(stack)
+    print("Popped element - \(stack.pop())")
+    print(stack)
+    print("Peek element - \(stack.peek)")
+    print()
+    
     print("Linked List")
     print("---------------------")
     var linkedList = LinkedList<Int>()
