@@ -26,7 +26,7 @@ extension Algorithm {
     
     // Findes and pops smallest element in the given array
     // Time complexity: O(n)
-    private static func popSmallest<T>(in array: inout [T]) -> T? where T: Comparable {
+    static func popSmallest<T>(in array: inout [T]) -> T? where T: Comparable {
         guard !array.isEmpty else { return nil }
         var smallestIndex: Int = array.startIndex
         

@@ -75,6 +75,11 @@ func runOnAppear() {
     print("Recursion")
     print("---------------------")
     print("factorial of 6 = \(Algorithm.factorialRecursive(of: 6))")
+    
+    print("fibonacci of 8 element = \(Algorithm.fibonacciRecursive(of: 8))")
+    
+    let numsUnsorted = [9, 7, 12, 18, 2, 3]
+    print("verify sorted array \(numsUnsorted) - \(Algorithm.recursiveVerifySorted(array: numsUnsorted))")
     print()
     
     let anyContainer: Any = [1, 2,[8, ["hello", 3.25]], "Alex"]
