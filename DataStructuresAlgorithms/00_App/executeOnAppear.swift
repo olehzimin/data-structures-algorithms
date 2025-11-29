@@ -64,6 +64,14 @@ func runOnAppear() {
     print("names - \(names)\nsorted - \(sortedNames)")
     print()
     
+    print("Merged Sort")
+    print("---------------------")
+    let ages = [9, 7, 12, 18, 2, 3]
+    let sortedAges = Algorithm.mergeSort(ages)
+    
+    print("names - \(ages)\nsorted - \(sortedAges)")
+    print()
+    
     print("Recursion")
     print("---------------------")
     print("factorial of 6 = \(Algorithm.factorialRecursive(of: 6))")
