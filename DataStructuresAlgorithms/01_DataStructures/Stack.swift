@@ -8,36 +8,36 @@
 import Foundation
 
 struct Stack<T>: CustomStringConvertible {
-    private var array: Array<T>
+    private var elements: Array<T>
     
     init() {
-        self.array = []
+        self.elements = []
     }
     
     // String representation
     // Time complexety: O(n)
     var description: String {
-        "Stack<\(T.self)>\(array.description)"
+        "Stack<\(T.self)>\(elements.description)"
     }
     
     var isEmpty: Bool {
-        array.isEmpty
+        elements.isEmpty
     }
     
     var count: Int {
-        array.count
+        elements.count
     }
     
     // View of the top element without removing it
     var peek: T? {
-        array.last
+        elements.last
     }
     
     mutating func push(_ element: T) {
-        array.append(element)
+        elements.append(element)
     }
     
     mutating func pop() -> T? {
-        isEmpty ? nil : array.removeLast()
+        isEmpty ? nil : elements.removeLast()
     }
 }

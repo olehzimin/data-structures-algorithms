@@ -3,4 +3,52 @@
    uuid = "3B1E243F-0BBF-4795-A1B9-30EBDED6A12A"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FB965AAC-D141-4025-9F11-BE39FE679C8C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DataStructuresAlgorithms/01_DataStructures/HashMap.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "increaseCapacity()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FB965AAC-D141-4025-9F11-BE39FE679C8C - 2249c1b8a6f67045"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DataStructuresAlgorithms.HashMap.increaseCapacity() -&gt; ()"
+                  moduleName = "DataStructuresAlgorithms.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oz/Main/Programming/Projects/data-structures-algorithms/DataStructuresAlgorithms/01_DataStructures/HashMap.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57">
+               </Location>
+               <Location
+                  uuid = "FB965AAC-D141-4025-9F11-BE39FE679C8C - 2249c1b8a6f67045"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DataStructuresAlgorithms.HashMap.increaseCapacity() -&gt; ()"
+                  moduleName = "DataStructuresAlgorithms.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oz/Main/Programming/Projects/data-structures-algorithms/DataStructuresAlgorithms/01_DataStructures/HashMap.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

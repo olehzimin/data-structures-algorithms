@@ -56,6 +56,17 @@ func runOnAppear() {
     print(linkedList)
     print()
     
+    print("Hash Map")
+    print("---------------------")
+    var hashMap = HashMap<String, Int>()
+    hashMap.add(26, for: "Alex")
+    hashMap.add(15, for: "Oleh")
+    hashMap.add(30, for: "Ann")
+    hashMap.add(48, for: "Lex")
+    
+    print(hashMap)
+    print()
+    
     print("Selection Sort")
     print("---------------------")
     let names = ["Zaha", "Alex", "Ann", "Ben", "Peter", "Camila", "Dionis"]
