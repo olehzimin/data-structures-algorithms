@@ -63,6 +63,9 @@ func runOnAppear() {
     hashMap.add(15, for: "Oleh")
     hashMap.add(30, for: "Ann")
     hashMap.add(48, for: "Lex")
+    hashMap.add(23, for: "Fedor")
+    hashMap.add(10, for: "Anton")
+    hashMap.add(65, for: "Marketa")
     
     print(hashMap)
     print()
