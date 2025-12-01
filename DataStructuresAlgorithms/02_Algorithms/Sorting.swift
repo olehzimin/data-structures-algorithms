@@ -8,6 +8,7 @@
 import Foundation
 
 extension Algorithm {
+    // MARK: Selection Sort
     // Findes smallest element in the given array and appends to the result array
     // Time complexity: O(n^2)
     static func selectionSort<T>(_ array: [T]) -> [T] where T: Comparable {
@@ -39,6 +40,7 @@ extension Algorithm {
         return array.remove(at: smallestIndex)
     }
     
+    // MARK: Merge Sort
     // Recursivly splits given array into halves, sorts each half and merges into sorted array
     // Time complexity: O(n log n)
     static func mergeSort<T>(_ array: [T]) -> [T] where T: Comparable {
@@ -89,6 +91,38 @@ extension Algorithm {
         }
         
         return resultArray
+    }
+    
+    // MARK: Quick Sort
+    // Splits array into left and right compared to pivot element
+    // Time complexity: O(n log n), but in worst case O(n^2)
+    static func quickSort<T>(_ array: [T]) -> [T] where T: Comparable {
+        // Base case
+        guard array.count > 1 else { return array }
+        
+        // Recursive case
+        var sorted: [T] = []
+        let pivot = array[0]
+        var leftArray: [T] = []
+        var rightArray: [T] = []
+        
+        for i in 1..<array.count {
+            let element = array[i]
+            if element < pivot {
+                leftArray.append(element)
+            } else {
+                rightArray.append(element)
+            }
+        }
+        
+        leftArray = quickSort(leftArray)
+        rightArray = quickSort(rightArray)
+        
+        sorted.append(contentsOf: leftArray)
+        sorted.append(pivot)
+        sorted.append(contentsOf: rightArray)
+        
+        return sorted
     }
 }
 
