@@ -7,79 +7,102 @@
 
 import Foundation
 
-struct HashMap<Key, Value>: CustomStringConvertible where Key: Hashable {
+// MARK: HashMap
+struct HashMap<Key, Value> where Key: Hashable {
     typealias Element = (key: Key, value: Value)
     
     private var buckets: [[Element]]
     
     private var reservedCapacity: Int
     private var currentCapacity: Int
+    private var elementsCount: Int
     
     init() {
         self.buckets = []
         self.reservedCapacity = 2
         self.currentCapacity = 0
+        self.elementsCount = 0
         
         self.buckets.reserveCapacity(reservedCapacity)
         self.buckets = Array(repeating: [], count: reservedCapacity)
         
     }
     
-    var description: String {
-        let existingElements = buckets.compactMap { $0 }
-        return String(existingElements.description)
-    }
+    // MARK: Computed properties
+    // Count of elements in the stack
+    // Time complexity: O(1) updates each time hashmap changes
+    var count: Int { elementsCount }
+    
+    // Indicator whether the hashmap is empty
+    // Time complexity: O(1) updates each time hashmap changes
+    var isEmpty: Bool { elementsCount == 0 }
     
     private var loadFactor: Double {
         Double(currentCapacity) / Double(reservedCapacity)
     }
     
-    mutating func add(_ value: Value, for key: Key) {
+    // MARK: Methods
+    // Adds new value or rewrites if key already exists
+    // Time complexity: O(1) and O(n) in case of incresing capacity
+    mutating func add(value: Value, for key: Key) {
         if loadFactor > 0.7 {
             increaseCapacity()
         }
         
         let index = index(for: key)
         if buckets[index].isEmpty { currentCapacity += 1 }
-        buckets[index].append((key, value))
+        
+        // Search in the current index bucket for key
+        let bucket = buckets[index]
+        let keyIndex = bucket.firstIndex { $0.key == key }
+        if let keyIndex {
+            buckets[index][keyIndex] = (key, value)
+        } else {
+            buckets[index].append((key, value))
+            elementsCount += 1
+        }
     }
     
-    private mutating func increaseCapacity() {
-//        let bufferElements = elements.compactMap { $0 }
-//        
-//        // Increase capacity
-//        reservedCapacity *= 2
-//        currentCapacity = 0
-//        elements.reserveCapacity(reservedCapacity)
-//        elements = Array(repeating: nil, count: reservedCapacity)
-//        
-//        // Remap all existing elements
-//        for bufferElement in bufferElements {
-//            add(bufferElement.value, for: bufferElement.key)
-//        }
+    // Removes key with its value
+    // Time complexity: O(1)
+    mutating func remove(for key: Key) {
+        let index = index(for: key)
+        guard !buckets[index].isEmpty else { return }
         
+        // Search in the current index bucket for key and remove
+        let oldCount = buckets[index].count
+        buckets[index].removeAll { $0.key == key }
+        let removed = oldCount - buckets[index].count
+        elementsCount -= removed
+    }
+    
+    // Findes element in hashmap nad returns its value
+    // Time complexity: O(1)
+    func value(for key: Key) -> Value? {
+        let index = index(for: key)
+        return buckets[index].first(where: { $0.key == key })?.value
+    }
+    
+    // Time complexity: O(n)
+    private mutating func increaseCapacity() {
         // Initialize new increased capacity
-        let newReservedCapacity = reservedCapacity * 2
-        var newCurrentCapacity = 0
+        reservedCapacity *= 2
         
         // Allocate new buckets array with updated capacity
         var newBuckets: [[Element]] = []
-        newBuckets.reserveCapacity(newReservedCapacity)
-        newBuckets = Array(repeating: [], count: newReservedCapacity)
+        newBuckets.reserveCapacity(reservedCapacity)
+        newBuckets = Array(repeating: [], count: reservedCapacity)
         
         // Remap all elements into new buckets array
         for bucket in buckets {
             for element in bucket {
                 let index = index(for: element.key)
-                if newBuckets[index].isEmpty { newCurrentCapacity += 1 }
                 newBuckets[index].append((element.key, element.value))
             }
         }
         
         // Rewrite current state of hash map
         self.buckets = newBuckets
-        self.reservedCapacity = newReservedCapacity
-        self.currentCapacity = newCurrentCapacity
     }
     
     private func index(for key: Key) -> Int where Key: Hashable {
@@ -87,5 +110,25 @@ struct HashMap<Key, Value>: CustomStringConvertible where Key: Hashable {
         let positive = abs(hash)
         
         return positive % reservedCapacity
+    }
+}
+
+// MARK: CustomStringConvertible
+extension HashMap: CustomStringConvertible {
+    // String representation
+    // Time complexety: O(n)
+    var description: String {
+        var valuesDescriptions: [String] = []
+        
+        // Map all elements
+        for bucket in buckets {
+            for element in bucket {
+                valuesDescriptions.append("\(element.key): \(element.value)")
+            }
+        }
+        
+        let joinedDescription = valuesDescriptions.joined(separator: ", ")
+        
+        return "[\(joinedDescription)]"
     }
 }

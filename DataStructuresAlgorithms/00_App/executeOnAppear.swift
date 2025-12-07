@@ -67,6 +67,10 @@ func runOnAppear() {
     hashMap.add(value: 10, for: "Anton")
     hashMap.add(value: 65, for: "Marketa")
     
+    hashMap.remove(for: "Alex")
+    hashMap.add(value: 100, for: "Marketa")
+    hashMap.remove(for: "Felix")
+    
     print(hashMap)
     print("isEmpty - \(hashMap.isEmpty)")
     print("count - \(hashMap.count)")
