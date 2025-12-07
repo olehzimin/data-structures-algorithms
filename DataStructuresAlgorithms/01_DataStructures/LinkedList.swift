@@ -133,9 +133,9 @@ extension LinkedList: CustomStringConvertible {
 }
 
 // MARK: - LinkedNode
-class LinkedNode<T> where T: Equatable {
+class LinkedNode<T> {
     private(set) var value: T
-    fileprivate(set) var nextNode: LinkedNode?
+    var nextNode: LinkedNode?
     
     init(value: T, nextNode: LinkedNode? = nil) {
         self.value = value

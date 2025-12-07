@@ -76,6 +76,37 @@ func runOnAppear() {
     print("count - \(hashMap.count)")
     print()
     
+    print("Queue")
+    print("---------------------")
+    var queue = Queue<String>()
+    
+    queue.push("Alex")
+    queue.push("Jess")
+    queue.push("Kate")
+    
+    print(queue)
+    print("isEmpty - \(queue.isEmpty)")
+    print("count - \(queue.count)")
+    
+    print("pop first")
+    queue.pop()
+    print(queue)
+    
+    print("push 'Petr'")
+    queue.push("Petr")
+    print(queue)
+    
+    print("pop first")
+    queue.pop()
+    print(queue)
+    print("pop first")
+    queue.pop()
+    print("pop first")
+    queue.pop()
+    print("isEmpty - \(queue.isEmpty)")
+    print("count - \(queue.count)")
+    print()
+    
     print("Selection Sort")
     print("---------------------")
     let names = ["Zaha", "Alex", "Ann", "Ben", "Peter", "Camila", "Dionis"]
