@@ -58,7 +58,7 @@ func runOnAppear() {
     
     print("Hash Map")
     print("---------------------")
-    var hashMap = HashMap<String, Int>()
+    var hashMap: HashMap = ["Alfonso": 1]
     hashMap.add(value: 26, for: "Alex")
     hashMap.add(value: 15, for: "Oleh")
     hashMap.add(value: 30, for: "Ann")
@@ -66,11 +66,15 @@ func runOnAppear() {
     hashMap.add(value: 23, for: "Fedor")
     hashMap.add(value: 10, for: "Anton")
     hashMap.add(value: 65, for: "Marketa")
+    print(hashMap)
     
     hashMap.remove(for: "Alex")
-    hashMap.add(value: 100, for: "Marketa")
+    hashMap["Marketa"] = 100
+    hashMap["Connor"] = 5
     hashMap.remove(for: "Felix")
+    hashMap["Oleh"] = nil
     
+    print("After hashmap edit")
     print(hashMap)
     print("isEmpty - \(hashMap.isEmpty)")
     print("count - \(hashMap.count)")

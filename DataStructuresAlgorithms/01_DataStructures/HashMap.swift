@@ -113,7 +113,7 @@ struct HashMap<Key, Value> where Key: Hashable {
     }
 }
 
-// MARK: CustomStringConvertible
+// MARK: ext Description
 extension HashMap: CustomStringConvertible {
     // String representation
     // Time complexety: O(n)
@@ -130,5 +130,29 @@ extension HashMap: CustomStringConvertible {
         let joinedDescription = valuesDescriptions.joined(separator: ", ")
         
         return "[\(joinedDescription)]"
+    }
+}
+
+// MARK: ext Subscript
+extension HashMap: ExpressibleByDictionaryLiteral {
+    init(dictionaryLiteral elements: (Key, Value)...) {
+        self.init()
+        for (key, value) in elements {
+            self.add(value: value, for: key)
+        }
+    }
+    
+    // Access to [] syntax, key must be legit
+    subscript(key: Key) -> Value? {
+        get {
+            value(for: key)
+        }
+        set(newValue) {
+            if let newValue {
+                add(value: newValue, for: key)
+            } else {
+                remove(for: key)
+            }
+        }
     }
 }
