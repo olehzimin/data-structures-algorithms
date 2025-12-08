@@ -61,4 +61,38 @@ extension Algorithm {
         
         return nil
     }
+    
+    // Breadth first search (BFS) for searching in the graph,
+    // findes the shortest path between vertecies if it exists.
+    // Time complexity: O(?)
+    static func bfSearch<Vertex>(for destinationVertex: Vertex, form startVertex: Vertex, in graph: Graph<Vertex>) -> Vertex? where Vertex: Hashable {
+        guard graph.edges[startVertex] != nil else { return nil }
+        
+        var found: Vertex? = nil
+        var queue = Queue<Vertex>()
+        var searched = Set<Vertex>()
+        
+        queue.push(startVertex)
+        while !queue.isEmpty {
+            if let currentVertex = queue.pop(), !searched.contains(currentVertex) {
+                if currentVertex == destinationVertex {
+                    found = currentVertex
+                    break
+                } else {
+                    if let connections = graph.edges[currentVertex] {
+                        for connection in connections {
+                            queue.push(connection)
+                        }
+                    }
+                    searched.insert(currentVertex)
+                }
+            }
+        }
+        
+        return found
+    }
+    
+    
 }
+
+

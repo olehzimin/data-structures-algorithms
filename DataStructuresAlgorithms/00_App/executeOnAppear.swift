@@ -144,4 +144,21 @@ func runOnAppear() {
     print("search for 5 - \(Algorithm.recursiveSearch(for: 5, in: anyContainer))")
     print("search for 'hello' - \(Algorithm.recursiveSearch(for: "hello", in: anyContainer))")
     print()
+    
+    print("Breadth first Search")
+    print("---------------------")
+    var graph = Graph<String>()
+    graph.edges = [
+        "Oleh": ["Alex", "Petr", "Bob"],
+        "Alex": ["Ann", "Fedor"],
+        "Petr": ["Oleh", "Max", "Kate"],
+        "Bob": ["Max"],
+        "Ann": ["Max"],
+        "Fedor": [],
+        "Kate": ["Max"]
+    ]
+    
+    let found = Algorithm.bfSearch(for: "Max", form: "Oleh", in: graph)
+    print(found)
+    print()
 }

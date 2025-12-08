@@ -73,4 +73,17 @@ final class SearchingTests: XCTestCase {
             _ = Algorithm.binarySearchRecursive(1_000_000, in: array)
         }
     }
+    
+    func testBFSearch() {
+        var graph = Graph<String>()
+        graph.edges = [
+            "Oleh": ["Alex", "Petr", "Bob"],
+            "Alex": ["Ann", "Fedor"],
+            "Petr": ["Oleh", "Max", "Kate"],
+            "Bob": ["Max"],
+            "Ann": ["Max"],
+            "Fedor": [],
+            "Kate": ["Max"]
+        ]
+    }
 }
