@@ -161,4 +161,23 @@ func runOnAppear() {
     let found = Algorithm.bfSearch(for: "Max", form: "Oleh", in: graph)
     print(found)
     print()
+    
+    print("Dijkstra Search Algorithm")
+    print("---------------------")
+    var weightedGraph = WeightedGraph<String>()
+    weightedGraph.edges["Start"] = [
+        WeightedVertex(value: "A", cost: 6),
+        WeightedVertex(value: "B", cost: 2)
+    ]
+    weightedGraph.edges["A"] = [
+        WeightedVertex(value: "End", cost: 1)
+    ]
+    weightedGraph.edges["B"] = [
+        WeightedVertex(value: "A", cost: 3),
+        WeightedVertex(value: "End", cost: 5)
+    ]
+    weightedGraph.edges["End"] = []
+    
+    print(Algorithm.dijkstraSearch(from: "Start", to: "End", in: weightedGraph))
+    print()
 }

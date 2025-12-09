@@ -114,7 +114,7 @@ extension Algorithm {
                 rightArray.append(element)
             }
         }
-        
+         
         leftArray = quickSort(leftArray)
         rightArray = quickSort(rightArray)
         

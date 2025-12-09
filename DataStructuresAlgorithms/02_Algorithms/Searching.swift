@@ -64,7 +64,7 @@ extension Algorithm {
     
     // Breadth first search (BFS) for searching in the graph,
     // findes the shortest path between vertecies if it exists.
-    // Time complexity: O(?)
+    // Time complexity: O(v+e)
     static func bfSearch<Vertex>(for destinationVertex: Vertex, form startVertex: Vertex, in graph: Graph<Vertex>) -> Vertex? where Vertex: Hashable {
         guard graph.edges[startVertex] != nil else { return nil }
         
@@ -92,7 +92,79 @@ extension Algorithm {
         return found
     }
     
-    
+    // Dijkstra Algorithm used to find the shortest path between two verticies
+    // in a weighted graph (with non-negative edge weights).
+    // Time complexity: O(v+e)
+    static func dijkstraSearch<Vertex>(
+        from start: Vertex,
+        to end: Vertex,
+        in graph: WeightedGraph<Vertex>
+    ) -> [Vertex]? where Vertex: Hashable {
+        // Check for existance of vertecies
+        guard graph.edges[start] != nil, graph.edges[end] != nil else { return nil }
+        
+        // Buffer for update min costs and parents for each vertex
+        var bufferTable: [Vertex: (costFromStart: UInt, parent: Vertex?)] = [:]
+        bufferTable[start] = (costFromStart: 0, parent: nil)
+        var processed = Set<Vertex>()
+        
+        var lowestCostVertex = findLowestCostVertex()
+        while lowestCostVertex != nil {
+            guard let currentVertex = lowestCostVertex else { break }
+            let costFromStart = bufferTable[currentVertex]?.costFromStart ?? 0
+            
+            if let directions = graph.edges[currentVertex] {
+                for direction in directions {
+                    let directionCostFromStart = costFromStart + direction.cost
+                    
+                    // Update costFromStart and parent or add new Vertex to bufferTable
+                    if let bufferVertex = bufferTable[direction.value] {
+                        if bufferVertex.costFromStart > directionCostFromStart {
+                            bufferTable[direction.value]?.costFromStart = directionCostFromStart
+                            bufferTable[direction.value]?.parent = currentVertex
+                        }
+                    } else {
+                        bufferTable[direction.value] = (costFromStart: directionCostFromStart, parent: currentVertex)
+                    }
+                }
+            }
+            
+            processed.insert(currentVertex)
+            lowestCostVertex = findLowestCostVertex()
+        }
+        
+        return getPath()
+        
+        func findLowestCostVertex() -> Vertex? {
+            var vertex: Vertex? = nil
+            
+            for key in bufferTable.keys {
+                guard !processed.contains(key) else { continue }
+                
+                if let currentVertex = bufferTable[vertex ?? key], let bufferVertex = bufferTable[key] {
+                    if bufferVertex.costFromStart <= currentVertex.costFromStart {
+                        vertex = key
+                    }
+                }
+            }
+            
+            return vertex
+        }
+        
+        func getPath() -> [Vertex] {
+            var path: [Vertex] = []
+            
+            var parent: Vertex? = end
+            while parent != nil {
+                guard let current = parent else { break }
+                path.append(current)
+                
+                parent = bufferTable[current]?.parent
+            }
+            
+            return path.reversed()
+        }
+    }
 }
 
 

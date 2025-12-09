@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Graph<Vertex: Hashable> {
+struct Graph<Vertex> where Vertex: Hashable {
     var edges: [Vertex: [Vertex]] = [:]
     
     mutating func addEdge(from a: Vertex, to b: Vertex) {
@@ -15,5 +15,25 @@ struct Graph<Vertex: Hashable> {
             edges[a] = []
         }
         edges[a]?.append(b)
+    }
+}
+
+struct WeightedGraph<Vertex> where Vertex: Hashable {
+    var edges: [Vertex: [WeightedVertex<Vertex>]] = [:]
+}
+
+struct WeightedVertex<Value> where Value: Hashable {
+    var value: Value
+    var cost: UInt
+    
+    init(value: Value, cost: UInt) {
+        self.value = value
+        self.cost = cost
+    }
+}
+
+extension WeightedVertex: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(value)
     }
 }
