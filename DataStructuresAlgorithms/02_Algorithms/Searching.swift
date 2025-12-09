@@ -63,19 +63,24 @@ extension Algorithm {
     }
     
     // Breadth first search (BFS) for searching in the graph,
-    // findes the shortest path between vertecies if it exists.
+    // finds the shortest path between vertecies if it exists.
+    // Nearest vertecies first in the queue.
     // Time complexity: O(v+e)
-    static func bfSearch<Vertex>(for destinationVertex: Vertex, form startVertex: Vertex, in graph: Graph<Vertex>) -> Vertex? where Vertex: Hashable {
-        guard graph.edges[startVertex] != nil else { return nil }
+    static func bfSearch<Vertex>(
+        from start: Vertex,
+        to end: Vertex,
+        in graph: Graph<Vertex>
+    ) -> Vertex? where Vertex: Hashable {
+        guard graph.edges[start] != nil, graph.edges[end] != nil else { return nil }
         
         var found: Vertex? = nil
         var queue = Queue<Vertex>()
         var searched = Set<Vertex>()
         
-        queue.push(startVertex)
+        queue.push(start)
         while !queue.isEmpty {
             if let currentVertex = queue.pop(), !searched.contains(currentVertex) {
-                if currentVertex == destinationVertex {
+                if currentVertex == end {
                     found = currentVertex
                     break
                 } else {
@@ -90,6 +95,64 @@ extension Algorithm {
         }
         
         return found
+    }
+    
+    // Depth first search (DFS) for searching in the graph,
+    // finds first possible path between vertecies.
+    // Linked vertecies first.
+    // Time complexity: O(v+e)
+    static func dfSearchRecursive<Vertex>(
+        from start: Vertex,
+        to end: Vertex,
+        in graph: Graph<Vertex>
+    ) -> [Vertex]? where Vertex: Hashable {
+        // Check for existance of vertecies
+        guard graph.edges[start] != nil, graph.edges[end] != nil else { return nil }
+        
+        var processed = Set<Vertex>()
+        var parents: [Vertex: Vertex] = [:]
+        
+        // Recursively search for path
+        guard isPathReal(from: start) else { return nil }
+        
+        return buildPath()
+        
+        func isPathReal(from vertex: Vertex) -> Bool {
+            // Base cases
+            guard vertex != end else { return true }
+            guard !processed.contains(vertex) else { return false }
+            
+            processed.insert(vertex)
+            
+            // Recursive case
+            var result = false
+            if let connections = graph.edges[vertex] {
+                for connection in connections {
+                    parents[connection] = vertex
+                    result = isPathReal(from: connection)
+                    
+                    if result { break }
+                }
+            }
+            
+            return result
+        }
+        
+        func buildPath() -> [Vertex]? {
+            guard parents[end] != nil else { return nil }
+            
+            var path: [Vertex] = []
+            var parent: Vertex? = end
+            
+            while parent != nil {
+                guard let current = parent else { break }
+                path.append(current)
+                
+                parent = parents[current]
+            }
+            
+            return path.reversed()
+        }
     }
     
     // Dijkstra Algorithm used to find the shortest path between two verticies
@@ -133,7 +196,7 @@ extension Algorithm {
             lowestCostVertex = findLowestCostVertex()
         }
         
-        return getPath()
+        return buildPath()
         
         func findLowestCostVertex() -> Vertex? {
             var vertex: Vertex? = nil
@@ -151,7 +214,7 @@ extension Algorithm {
             return vertex
         }
         
-        func getPath() -> [Vertex] {
+        func buildPath() -> [Vertex] {
             var path: [Vertex] = []
             
             var parent: Vertex? = end

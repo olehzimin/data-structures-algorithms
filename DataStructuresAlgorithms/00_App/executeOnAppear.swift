@@ -147,6 +147,23 @@ func runOnAppear() {
     
     print("Breadth first Search")
     print("---------------------")
+    var friends = Graph<String>()
+    friends.edges = [
+        "Oleh": ["Alex", "Petr", "Bob"],
+        "Alex": ["Ann", "Fedor"],
+        "Petr": ["Oleh", "Max", "Kate"],
+        "Bob": ["Max"],
+        "Ann": ["Max"],
+        "Fedor": [],
+        "Kate": ["Max"],
+        "Max": []
+    ]
+    
+    print(Algorithm.bfSearch(from: "Oleh", to: "Max", in: friends))
+    print()
+    
+    print("Depth first Search")
+    print("---------------------")
     var graph = Graph<String>()
     graph.edges = [
         "Oleh": ["Alex", "Petr", "Bob"],
@@ -155,11 +172,11 @@ func runOnAppear() {
         "Bob": ["Max"],
         "Ann": ["Max"],
         "Fedor": [],
-        "Kate": ["Max"]
+        "Kate": ["Max"],
+        "Max": []
     ]
     
-    let found = Algorithm.bfSearch(for: "Max", form: "Oleh", in: graph)
-    print(found)
+    print(Algorithm.dfSearchRecursive(from: "Oleh", to: "Max", in: graph))
     print()
     
     print("Dijkstra Search Algorithm")
